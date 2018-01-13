@@ -9,7 +9,8 @@ connection = pymysql.connect(host='localhost',
                              password='',
                              db='teamgnc')
 mailinglist = []
-
+# def checkCon:
+#     sql1 = "SELECT email FROM empgnc where "
 print("connect successful!!")
 try:
 
