@@ -1,6 +1,6 @@
  <?php
 $servername = "localhost";
-$username = "username";
+$username = "root";
 $password = "";
 $dbname = "teamgnc";
 // define variables and set to empty values
@@ -14,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $DOJ = test_input($_POST["DOJ"]);
   $PHONE = test_input($_POST["PHONE"]);
   $EMAIL = test_input($_POST["EMAIL"]);
+  $DOBM = date("Y-m-d H:i:s",strtotime($DOB));
+  $DOJM = date("Y-m-d H:i:s",strtotime($DOJ));
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -21,7 +23,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO empgnc VALUES ('$EID','$FNAME','$LNAME','$DOB','$DOJ','$PHONE','$EMAIL')";
+$sql = "INSERT INTO empgnc VALUES ('$EID','$FNAME','$LNAME','$DOBM','$DOJM','$PHONE','$EMAIL')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
@@ -29,7 +31,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-
+$conn->close();
 }
 
 function test_input($data) {
@@ -38,5 +40,4 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
-$conn->close();
 ?> 
